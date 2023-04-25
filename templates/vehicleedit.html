@@ -1,0 +1,89 @@
+{% extends "innerlayout.html" %}
+{% block title %}Vehicle{% endblock %}
+{% block content %}
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Vehicle</h1>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item">Add a Vehicle</li>
+                  </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="active tab-pane" id="addvehicle">
+                      <form class="form-horizontal" method="POST">
+                        <div class="form-group row">
+                          <label for="inputEmail" class="col-sm-2 col-form-label">Vechile Year</label>
+                          <input type="hidden" name="vehiclenumber" value="{{row['Vehicle_ID']}}">
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Vechile Year" name="vehicleyear" value="{{row['Year']}}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputEmail" class="col-sm-2 col-form-label">Vechile Type</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Vechile Type" name="vehicletype" value="{{row['Type']}}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="inputEmail" class="col-sm-2 col-form-label">vehicle MFG</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Vehicle MFG" name="vehiclemfg" value="{{row['Mfg']}}">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail" class="col-sm-2 col-form-label">Model</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputEmail" placeholder="Vehicle Model" name="vehiclemodel" value="{{row['Model']}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail" class="col-sm-2 col-form-label">Color</label>
+                            <div class="col-sm-10">
+                              <input type="text" class="form-control" id="inputEmail" placeholder="Vehicle Color" name="vehiclecolor" value="{{row['Color']}}">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <div class="offset-sm-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a href="{{url_for('vehicle.view')}}" class="btn btn-danger">Cancel</a>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                  </div>
+                  <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+</body>
+{% endblock %}

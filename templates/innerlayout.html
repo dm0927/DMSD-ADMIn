@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/fontawesome-free/css/all.min.css')}}">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.css')}}">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css')}}">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/bs-stepper/css/bs-stepper.min.css')}}">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/dropzone/min/dropzone.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/adminlte.min.css')}}">
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+
+<body>
+    <div id="header">
+        {% include "nav.html" %}
+    </div>
+    <!-- jQuery -->
+    <script src="{{ url_for('static', filename='plugins/jquery/jquery.js')}}"></script>
+    <div id="content">
+        {% include 'flash.html' %}
+        {% block content %} {% endblock %}
+    </div>
+    <div id="footer" class="mt-auto py-3 bg-primary text-center fixed-bottom">
+        <div class="container">
+            {% block footer %}
+            <span>Woody's Management &copy; Copyright 2023.</span>
+            {% endblock %}
+        </div>
+    </div>
+</body>
+<!-- Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Select2 -->
+<script src="{{ url_for('static', filename='plugins/select2/js/select2.full.min.js')}}"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="{{ url_for('static', filename='plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
+<!-- InputMask -->
+<script src="{{ url_for('static', filename='plugins/moment/moment.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/inputmask/jquery.inputmask.min.js')}}"></script>
+<!-- date-range-picker -->
+<script src="{{ url_for('static', filename='plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- bootstrap color picker -->
+<script src="{{ url_for('static', filename='plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')}}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ url_for('static', filename='plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<!-- Bootstrap Switch -->
+<script src="{{ url_for('static', filename='plugins/bootstrap-switch/js/bootstrap-switch.min.js')}}"></script>
+<!-- BS-Stepper -->
+<script src="{{ url_for('static', filename='plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
+<!-- dropzonejs -->
+<script src="{{ url_for('static', filename='plugins/dropzone/min/dropzone.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{ url_for('static', filename='dist/js/adminlte.min.js')}}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{ url_for('static', filename='dist/js/demo.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+    $('.select2').select2()
+</script>
+</html>

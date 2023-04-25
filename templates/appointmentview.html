@@ -1,0 +1,63 @@
+{% extends "innerlayout.html" %}
+{% block title %}Vehicle{% endblock %}
+{% block content %}
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+        <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                <h1>Vehicle</h1>
+                </div>
+            </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Vehicle Listing</h3>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Appointment Id</th>
+                                            <th>Appointment Date</th>
+                                            <th>Vehicle Number</th>
+                                            <th>Appointment Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if appointment and appointment|length > 0 %}
+                                            {% for row in appointment %}
+                                                <tr>
+                                                    <td>{{row.Appoint_Id}}</td>
+                                                    <td>{{row.Date}}</td>
+                                                    <td>{{row.Date}}</td>
+                                                    <td>{{row.Date}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="100%" class="text-center">No results to show</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                    </div>
+                </div><!-- /.card-body -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+</body>
+{% endblock %}
