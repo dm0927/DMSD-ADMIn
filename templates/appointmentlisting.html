@@ -1,0 +1,142 @@
+{% extends "innerlayout.html" %}
+{% block title %}Vehicle{% endblock %}
+{% block content %}
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+        <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                <h1>Vehicle</h1>
+                </div>
+            </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <form method="GET">
+                    <div class="col-md-12 row">
+                        <div class="col-md-2">
+                            <input class="form-control" type="text" name="customername" id="customername" placeholder="Customer Name">
+                        </div>
+                        <div class="col-md-2">
+                            <select class="custom-select" name="vehiclelist" id="vehiclelist">
+                                <option value="">Select a Vehicle</option>
+                                {% if vehicles and vehicles|length > 0 %}
+                                    {% for vehicle in vehicles %}
+                                    <option value="{{vehicle.Vehicle_ID}}" >{{vehicle.Vehicle_ID}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="custom-select" name="location" value="{{request.args.get('location')}}">
+                                <option value="">Select a Location</option>
+                                {% if location and location|length > 0 %}
+                                    {% for l in location %}
+                                    <option value="{{l.Location_id}}">{{l.Address}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="custom-select" name="status" value="{{request.args.get('status')}}">
+                                <option value="">Select a Status</option>
+                                <option value="Created">Created</option>
+                                <option value="Progress">Progress</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Paid">Paid</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-danger" value="Filter">
+                            <a href="?" class="btn btn-secondary" value="Reset">Reset</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">View Appointment List</h3>
+                            </div>
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Appointment Id</th>
+                                            <th>Customer Name</th>
+                                            <th>Appointment Date</th>
+                                            <th>Location(Drop Off)</th>
+                                            <th>Appointment Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if appointments and appointments|length > 0 %}
+                                            {% for row in appointments %}
+                                                <tr>
+                                                    <td>{{row.Appoint_Id}}</td>
+                                                    <td>{{row.name}}</td>
+                                                    <td>{{row.Date}}</td>
+                                                    <td>{{row.address}}</td>
+                                                    <td>{{row.status}}</td>
+                                                    <td><a href="{{url_for('appointment.appointmentview')}}?id={{row.Appoint_Id}}">View</a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="100%" class="text-center">No results to show</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                    </div>
+                </div><!-- /.card-body -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+
+        
+
+        // $(document).on('change', '#vehiclelist', function(){
+        //     $('#typeofservice').html('')
+        //     var vehicleId = $('#vehiclelist').val()
+        //     if(vehicleId != "0") {
+        //         data = {
+        //         'vehicleId' : vehicleId
+        //         }
+        //         $.ajax({
+        //             type: "POST",
+        //             url: 'getVehicleServices',
+        //             data: data,
+        //             dataType: "json",
+        //             success: function(result) {
+        //             if(result.data.length > 0) {
+        //                 $('#vehicletype').val(result.data[0]['type'])
+        //                 option = '<option value="0">Select an Option</option>'
+        //                 for(i = 0; i < result.data.length; i++) {
+        //                 option += `<option value=${result.data[i]['service_id']}>${result.data[i]['service_name']}</option>`
+        //                 }
+        //                 $('#typeofservice').append(option)
+        //             }
+        //             }
+        //         });
+        //     }
+        // })
+
+
+
+    })
+  </script>
+{% endblock %}

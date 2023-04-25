@@ -1,0 +1,64 @@
+{% extends "innerlayout.html" %}
+{% block title %}Vehicle{% endblock %}
+{% block content %}
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+        <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </section>
+        
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 mt-2">
+                        <div class="card">
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <tbody>
+                                        {% if rows and rows|length > 0 %}
+                                            <form method="POST">
+                                                <tr>
+                                                    <td>Vehicle Type</td>
+                                                    <td>{{ rows['Vehicle_type'] }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Service Name</td>
+                                                    <td>{{ rows['Service_name'] }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Price</td>
+                                                    <td>
+                                                        <input type="hidden" name="service_id" value="{{rows['Service_ID']}}">
+                                                        <input type="text" value="{{ rows['Labor'] }}" class="form-control" name="price">
+                                                    </td>
+                                                    <td>
+                                                        <div class="pull-right">
+                                                            <input type="submit" class="btn btn-primary">
+                                                            <a href="{{url_for('appointment.services')}}" class="btn btn-danger">Cancel</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="100%" class="text-center">No results to show</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                    </div>
+                </div><!-- /.card-body -->
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+</body>
+{% endblock %}

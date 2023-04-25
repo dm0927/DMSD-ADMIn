@@ -27,8 +27,6 @@ def create_app(config_filename=''):
         app.register_blueprint(home)
         from views.appointment import appointment
         app.register_blueprint(appointment)
-        from views.vehicle import vehicle
-        app.register_blueprint(vehicle)
 
         login_manager.init_app(app)
         @login_manager.user_loader
@@ -36,7 +34,7 @@ def create_app(config_filename=''):
             from sql.db import DB
             from auth.models import User
             try:
-                result = DB.selectOne("SELECT Cust_ID as id, Name as name, Phone as phone, Email as email, Address as address FROM CUSTOMER WHERE Cust_ID = %s", id)
+                result = DB.selectOne("SELECT SSN as id, Name as name, email, role FROM EMPLOYEE WHERE SSN = %s", id)
                 if result.status:
                     return User(**result.row)
             except Exception as e:
@@ -53,4 +51,4 @@ def create_app(config_filename=''):
 app = create_app()
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8000)))
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8001)))

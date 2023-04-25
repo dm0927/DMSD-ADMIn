@@ -1,0 +1,115 @@
+{% extends "innerlayout.html" %}
+{% block title %}Vehicle{% endblock %}
+{% block content %}
+<body class="hold-transition layout-top-nav">
+  <div class="wrapper">
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Appointment Details</h1>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+  
+      <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-bordered text-nowrap" style="background-color:white;">
+                                <tbody>
+                                    <tr>
+                                        <td>Appointment Id : <b>{{appointmentResult['Appoint_Id']}}</b></td>
+                                        <td>Appointment Date: <b>{{appointmentResult['Date']}}</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Appointment DropOff : <b>{{appointmentResult['address']}}</b></td>
+                                        <td>Appointment Status: 
+                                                    {% if appointmentResult['status'] != "Paid" %}
+                                                        <form method="POST">
+                                                            <div class="col-md-12 row">
+                                                                <input type="hidden" value="{{appointmentResult['Appoint_Id']}}" name="appointmentid">
+                                                                <div class="col-md-6">
+                                                                    <select class="form-control mt-2" name="statuschange">
+                                                                        <option value="Created" {% if appointmentResult['temp_status'] == 'Created' %} selected {% endif %}>Created</option>
+                                                                        <option value="Progress" {% if appointmentResult['temp_status'] == 'Progress' %} selected {% endif %}>Progress</option>
+                                                                        <option value="Completed" {% if appointmentResult['temp_status'] == 'Completed' %} selected {% endif %}>Completed</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6 mt-2">
+                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    {% else %}
+                                                        <b>{{appointmentResult['status']}}</b>
+                                                    {% endif %}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-bordered text-nowrap" style="background-color:white;">
+                                <tbody>
+                                    <tr>
+                                        <td>Grand Total : <b>{{serviceResult[0]['grand_total']}}</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-bordered text-nowrap" style="background-color:white;">
+                                <thead>
+                                    <tr>
+                                        <th>Service Name</th>
+                                        <th>Service Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for s in serviceResult %}
+                                        <tr>
+                                            <td>{{ s['service_name'] }}</td>
+                                            <td>{{ s['price'] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-bordered text-nowrap" style="background-color:white;">
+                                <thead>
+                                    <tr>
+                                        <th>Part Name</th>
+                                        <th>Part Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for s in partResult %}
+                                        <tr>
+                                            <td>{{ s['name'] }}</td>
+                                            <td>{{ s['Price'] }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+      <!-- /.content -->
+    </div>
+</body>
+{% endblock %}

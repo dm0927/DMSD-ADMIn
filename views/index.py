@@ -23,7 +23,7 @@ def authentication():
     email = request.form.get('email')
     password = request.form.get('password')
     try:
-        result = DB.selectOne("SELECT Cust_ID as id, Name as name, Phone as phone, Email as email, Address as address, password FROM CUSTOMER WHERE email = %s", email)
+        result = DB.selectOne("SELECT SSN as id, Name as name, email, password, role FROM EMPLOYEE WHERE email = %s", email)
         if result.status and result.row:
             if bcrypt.check_password_hash(result.row["password"], password):
                 del result.row["password"] # don't carry password/hash beyond here
@@ -38,6 +38,7 @@ def authentication():
         else:
             flash("We weren't able to find the user.", "warning")
     except Exception as e:
+        print(str(e))
         flash("Something wen't wrong, please try again later", "danger")
     return redirect(url_for("home.index"))
 

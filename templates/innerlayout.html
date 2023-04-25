@@ -42,13 +42,6 @@
         {% include 'flash.html' %}
         {% block content %} {% endblock %}
     </div>
-    <div id="footer" class="mt-auto py-3 bg-primary text-center fixed-bottom">
-        <div class="container">
-            {% block footer %}
-            <span>Woody's Management &copy; Copyright 2023.</span>
-            {% endblock %}
-        </div>
-    </div>
 </body>
 <!-- Bootstrap 4 -->
 <script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

@@ -1,12 +1,11 @@
 from flask_login import UserMixin
 import json
 class User(UserMixin):
-    def __init__(self, id, name, address, phone, email):
+    def __init__(self, id, name, email, role):
         self.id = id
         self.name = name
-        self.address = address
-        self.phone = phone
         self.email = email
+        self.role = role
         self.authenticated = False
     def is_anonymous(self):
         return False

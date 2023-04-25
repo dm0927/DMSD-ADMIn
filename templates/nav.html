@@ -15,24 +15,13 @@
                     <a href="{{url_for('home.dashboard')}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link"></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Vehicle's</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                      <li><a href="{{url_for('vehicle.add')}}" class="dropdown-item">Add a Vehicle</a></li>
-                      <li><a href="{{url_for('vehicle.view')}}" class="dropdown-item">View Vehicle</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Appointment</a>
-                    <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                      <li><a href="{{url_for('appointment.book')}}" class="dropdown-item">Book an Appointment</a></li>
-                      <li><a href="{{url_for('appointment.view')}}" class="dropdown-item">View Appointment's</a></li>
-                    </ul>
+                    <a href="{{url_for('appointment.list')}}" class="nav-link">List Appointment</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{url_for('home.profile')}}" class="nav-link">Profile</a>
+                    <a href="{{url_for('appointment.services')}}" class="nav-link">List Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{url_for('appointment.part')}}" class="nav-link">List Part</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{url_for('home.logout')}}" class="nav-link">Logout</a>
