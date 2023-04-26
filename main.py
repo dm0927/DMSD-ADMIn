@@ -27,6 +27,8 @@ def create_app(config_filename=''):
         app.register_blueprint(home)
         from views.appointment import appointment
         app.register_blueprint(appointment)
+        from views.management import management
+        app.register_blueprint(management)
 
         login_manager.init_app(app)
         @login_manager.user_loader
