@@ -167,3 +167,31 @@ def partedit():
             print(str(e))
             flash("Something wen't wrong, please try again later", "danger")
     return render_template("partview.html", rows=result.row)
+
+@appointment.route('/appointment-location', methods=['GET'])
+@login_required
+def appointmentlocation():
+    date = request.args.get('bookingdate',"")
+    c = current_user.id
+
+    args = {}
+    args['c'] = c
+    getLocation = """
+                        SELECT Appoint_Id, Date, c.name as customer_name, a.status
+                        from employee as e
+                        left join appointment as a on a.location_ID = e.Location_ID
+                        left join customer as c on a.customer_id = c.cust_id
+                        where e.SSN = %(c)s
+                  """
+    
+    if date != "":
+        getLocation += " and Date = %(d)s"
+        args['d'] = date
+    
+    getLocation = DB.selectAll(getLocation, args)
+
+    if getLocation and getLocation.rows:
+        for g in getLocation.rows:
+            g['Date'] = str(g['Date'])
+    
+    return render_template("appointmentlistlocation.html", rows=getLocation.rows)

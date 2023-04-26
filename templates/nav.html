@@ -14,15 +14,22 @@
                 <li class="nav-item">
                     <a href="{{url_for('home.dashboard')}}" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{url_for('appointment.list')}}" class="nav-link">List Appointment</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{url_for('appointment.services')}}" class="nav-link">List Services</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{url_for('appointment.part')}}" class="nav-link">List Part</a>
-                </li>
+                {% if current_user['role'] == "Manager" %}
+                    <li class="nav-item">
+                        <a href="{{url_for('appointment.appointmentlocation')}}" class="nav-link">Appointment Location</a>
+                    </li>
+                {% endif %}
+                {% if current_user['role'] == "Admin" %}
+                    <li class="nav-item">
+                        <a href="{{url_for('appointment.list')}}" class="nav-link">List Appointment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('appointment.services')}}" class="nav-link">List Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url_for('appointment.part')}}" class="nav-link">List Part</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
                     <a href="{{url_for('home.logout')}}" class="nav-link">Logout</a>
                 </li>
