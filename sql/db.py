@@ -60,6 +60,7 @@ class DB:
                     print(f"db.py status {status}")
                     status = True if status >= 0 else False
                     response = DBResponse(status, None, result)
+                db.commit()
             else:
                 if op != CRUD.ALTER:
                     db.commit()
