@@ -37,7 +37,7 @@
                     <div class="col-md-12 mt-2">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">View Appointment List</h3>
+                                <h3 class="card-title">Service Amount Collected in Top 3 Location</h3>
                             </div>
                             {% if rows and rows|length > 0 %}
                             <div class="card-body table-responsive p-0">
@@ -45,11 +45,48 @@
                                     <thead>
                                         <tr>
                                             <th>Location</th>
-                                            <th>Amount Collected</th>
+                                            <th>Service Amount Collected</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                             {% for row in rows %}
+                                                <tr>
+                                                    <td>{{row.address}}</td>
+                                                    <td>{{row.total_amount}}</td>
+                                                </tr>
+                                            {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% else %}
+                            <div class="card-body table-responsive p-0">
+                                <table>
+                                    <tbody>
+                                        <tr class="text-center">
+                                            <td colspan="100%">No Records to Display</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endif %}
+                        </div> 
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Part Amount Collected in Top 3 Location</h3>
+                            </div>
+                            {% if rows and rows|length > 0 %}
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Location</th>
+                                            <th>Part Amount Collected</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            {% for row in rows1 %}
                                                 <tr>
                                                     <td>{{row.address}}</td>
                                                     <td>{{row.total_amount}}</td>

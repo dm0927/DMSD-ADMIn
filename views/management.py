@@ -42,6 +42,7 @@ def revenuecomputer():
     enddate = request.args.get('enddate', "")
     location = request.args.get('location', "0")
     result = []
+    result1 = []
     if startdate != "" and enddate != "": 
         getrevenue = """
                             SELECT a.location_id, l.address, s.service_id, s.service_name, sum(b.price) as total_amount
@@ -51,23 +52,39 @@ def revenuecomputer():
                             left join service  as s on s.service_id = b.service_id
                             where a.status = "Paid"
                     """
+        
+        getPart = """
+                        SELECT a.location_id, l.address, p.part_id, p.name, sum(b.price) as total_amount
+                        from appointment as a
+                        left join billpart as b on b.appoint_id = a.appoint_id
+                        left join location as l on l.location_id = a.location_id
+                        left join part  as p on p.part_id = b.part_id
+                        where a.status = "Paid"
+                  """
     
         getrevenue += " and a.date between %(startdate)s and %(enddate)s"
+        getPart    += " and a.date between %(startdate)s and %(enddate)s"
         args['startdate'] = startdate
         args['enddate'] = enddate
 
         if location != "0":
             getrevenue += " and l.address = %(location)s"
+            getPart += " and l.address = %(location)s"
             args['location'] = location
 
         
         getrevenue += " group by a.location_id, s.service_id, s.service_name"
+        getPart += " group by a.location_id, p.part_id, p.name"
+
         result = DB.selectAll(getrevenue, args)
         result = result.rows
-    
+
+        result1 = DB.selectAll(getPart, args)
+        result1 = result1.rows
+
     location = DB.selectAll(""" SELECT Location_id, Address from Location """)
 
-    return render_template("revenuecomputer.html", location=location.rows, rows=result)
+    return render_template("revenuecomputer.html", location=location.rows, rows=result, rows1=result1)
 
 @management.route('/top-location')
 def toplocation():
@@ -76,6 +93,7 @@ def toplocation():
     startdate = request.args.get('startdate', "")
     enddate = request.args.get('enddate', "")
     result = []
+    result1 = []
 
     if startdate != "" and enddate != "": 
         getrevenue = """
@@ -86,14 +104,30 @@ def toplocation():
                             left join service  as s on s.service_id = b.service_id
                             where a.status = 'Paid'
                     """
+
+        getPart = """
+                        SELECT a.location_id, l.address, sum(b.price) as total_amount
+                        from appointment as a
+                        left join billpart as b on b.appoint_id = a.appoint_id
+                        left join location as l on l.location_id = a.location_id
+                        left join part  as p on p.part_id = b.part_id
+                        where a.status = "Paid"
+                  """
     
         getrevenue += " and a.date between %(startdate)s and %(enddate)s"
+        getPart += " and a.date between %(startdate)s and %(enddate)s"
+
         args['startdate'] = startdate
         args['enddate'] = enddate
 
         getrevenue += " group by a.location_id order by total_amount desc limit 3"
+        getPart += " group by a.location_id order by total_amount desc limit 3"
+
         result = DB.selectAll(getrevenue, args)
         result = result.rows
 
+        result1 = DB.selectAll(getPart, args)
+        result1 = result1.rows
+
     
-    return render_template("toplocation.html", rows=result)
+    return render_template("toplocation.html", rows=result, rows1=result1)
